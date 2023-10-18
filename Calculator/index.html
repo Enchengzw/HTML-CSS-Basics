@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class = page>
+    <div class = calculator>
+        <div class = displaycontainer>
+        <div class = display id = "display"></div>
+        </div>
+        <div class = line>
+            <button class = clear>CLEAR</button>
+            <button class = delete>DELETE</button>
+        </div>
+        <div class = line>
+            <button class = button>7</button>
+            <button class = button>8</button>
+            <button class = button>9</button>
+            <button class = button>/</button>
+        </div>
+        <div class = line>
+            <button class = button>4</button>
+            <button class = button>5</button>
+            <button class = button>6</button>
+            <button class = button>*</button>
+        </div>
+        <div class = line>
+            <button class = button>1</button>
+            <button class = button>2</button>
+            <button class = button>3</button>
+            <button class = button>-</button>
+        </div>
+        <div class = line>
+            <button class = button>0</button>
+            <button class = button>.</button>
+            <button class = equal>=</button>
+            <button class = button>+</button>
+        </div>
+    </div>
+</div>
+<script>
+    let display = document.getElementById('display');
+
+    const clear = document.querySelector('.clear');
+    clear.addEventListener('click', () => {display.textContent = '';});
+
+    const deletebtn = document.querySelector('.delete');
+    
+    deletebtn.addEventListener('click', () => 
+    {display.textContent = display.textContent.slice(0,-1)});
+
+    const buttons = document.querySelectorAll('.button');
+    buttons.forEach((button) => {button.addEventListener('click', () =>
+    display.innerHTML += button.innerHTML);}); 
+
+    const equal = document.querySelector('.equal')
+    equal.addEventListener('click', () => {Calculate();});
+
+    function Calculate() {
+        let Expression = display.innerHTML.split(/(\+|\-|\*|\/)/);
+        let operation_number = Math.floor(Expression.length/2);
+        let operation_array = [];
+        for (i = 0; i < operation_number; i++) {
+            operation_array[0] = Expression.shift();
+            operation_array[1] = Expression.shift();
+            operation_array[2] = Expression.shift();
+            Expression.unshift(Operate(parseFloat(operation_array[0]),operation_array[1],parseFloat(operation_array[2])));            
+        }
+        display.innerHTML = Expression[0];
+    }
+
+
+    function Operate(number1,operator,number2) {
+
+        if (operator == '+') {return Add(number1,number2);}
+
+        else if (operator == '-') {return Substract(number1,number2);}
+
+        else if (operator == '*') {return Multiply(number1,number2);}
+
+        else if (operator == '/') {return Divide(number1,number2);}
+    }
+
+    function Add(number1,number2) {
+        return number1+number2;}
+
+    function Substract(number1,number2) {
+	    return number1-number2;}
+
+    function Multiply(number1,number2) {
+	    return number1*number2;}
+
+    function Divide(number1,number2) {
+	    return number1/number2;}
+    
+    
+
+</script>
+
+</body>
+</html>

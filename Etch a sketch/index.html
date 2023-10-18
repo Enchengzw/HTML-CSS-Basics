@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class = generate>Generate</button>
+    <div class = gridcontainer></div>
+
+
+    <script>
+    const container = document.querySelector('.gridcontainer');
+
+    for (let i = 0; i < 4; i++){
+    const squareline = document.createElement('div');
+    squareline.classList.add('squareline');
+        for (let j = 0; j < 4; j++){
+        const square = document.createElement('div');
+        square.classList.add('square');
+        squareline.appendChild(square);
+        }
+    container.appendChild(squareline)
+    }
+
+    const generatebutton = document.querySelector('.generate');
+    generatebutton.addEventListener('click',() => {
+        GenerateGrid();
+    });
+
+    const squares = document.querySelectorAll('.square');
+        squares.forEach((square) => {square.addEventListener('mouseleave', () => 
+        square.style.backgroundColor = 'blue');});
+
+
+    function GenerateGrid(){
+        container.innerHTML = "";
+        let num = prompt('Specify squares per side');
+        for (let i = 0; i < parseInt(num); i++){
+            const squareline = document.createElement('div');
+            squareline.classList.add('squareline');
+            for (let j = 0; j < parseInt(num); j++){
+                const square = document.createElement('div');
+                square.classList.add('square');
+            squareline.appendChild(square);
+            }
+        container.appendChild(squareline)
+        }
+
+        const squares = document.querySelectorAll('.square');
+        squares.forEach((square) => {square.addEventListener('mouseleave', () => 
+        square.style.backgroundColor = 'blue');});
+    }
+
+
+    </script>
+</body>
+</html>
